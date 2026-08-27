@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/salar/development/active/neural_network/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

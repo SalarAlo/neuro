@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/neural_network_core.dir/src/Network.cpp.o"
-  "CMakeFiles/neural_network_core.dir/src/Network.cpp.o.d"
+  "CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o"
+  "CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o.d"
   "libneural_network_core.a"
   "libneural_network_core.pdb"
 )

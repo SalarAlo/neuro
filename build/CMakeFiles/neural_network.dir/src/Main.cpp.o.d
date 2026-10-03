@@ -100,12 +100,14 @@ CMakeFiles/neural_network.dir/src/Main.cpp.o: \
  /usr/include/bits/pthreadtypes-arch.h \
  /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
  /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
- /usr/include/bits/stdlib-float.h /usr/include/c++/16/bits/std_abs.h \
- /usr/include/c++/16/cstdio /usr/include/stdio.h \
- /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__fpos64_t.h \
+ /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
+ /usr/include/c++/16/bits/std_abs.h /usr/include/c++/16/cstdio \
+ /usr/include/stdio.h /usr/include/bits/types/__fpos_t.h \
+ /usr/include/bits/types/__fpos64_t.h \
  /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
- /usr/include/bits/stdio_lim.h /usr/include/c++/16/bits/basic_string.tcc \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/stdio.h \
+ /usr/include/c++/16/bits/basic_string.tcc \
  /usr/include/c++/16/bits/memory_resource.h /usr/include/c++/16/cstddef \
  /usr/include/c++/16/bits/uses_allocator.h \
  /usr/include/c++/16/bits/uses_allocator_args.h /usr/include/c++/16/tuple \
@@ -159,8 +161,15 @@ CMakeFiles/neural_network.dir/src/Main.cpp.o: \
  /usr/include/c++/16/bits/uniform_int_dist.h \
  /usr/include/c++/16/bits/stl_tempbuf.h \
  /usr/include/c++/16/bits/unicode-data.h /usr/include/c++/16/bits/print.h \
- /home/salar/development/active/neural_network/src/Dense.hpp \
- /usr/include/c++/16/random /usr/include/c++/16/cmath /usr/include/math.h \
+ /usr/include/c++/16/iostream /usr/include/c++/16/ostream \
+ /usr/include/c++/16/bits/ostream.h /usr/include/c++/16/ios \
+ /usr/include/c++/16/bits/basic_ios.h \
+ /usr/include/c++/16/bits/basic_ios.tcc \
+ /usr/include/c++/16/bits/ostream_print.h \
+ /usr/include/c++/16/bits/ostream.tcc /usr/include/c++/16/istream \
+ /usr/include/c++/16/bits/istream.tcc \
+ /home/salar/development/active/neural_network/src/Activations.hpp \
+ /usr/include/c++/16/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
  /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
@@ -178,17 +187,11 @@ CMakeFiles/neural_network.dir/src/Main.cpp.o: \
  /usr/include/c++/16/tr1/modified_bessel_func.tcc \
  /usr/include/c++/16/tr1/poly_hermite.tcc \
  /usr/include/c++/16/tr1/poly_laguerre.tcc \
- /usr/include/c++/16/tr1/riemann_zeta.tcc \
- /usr/include/c++/16/bits/random.h /usr/include/c++/16/vector \
- /usr/include/c++/16/bits/stl_uninitialized.h \
- /usr/include/c++/16/bits/stl_vector.h \
- /usr/include/c++/16/bits/stl_bvector.h \
- /usr/include/c++/16/bits/vector.tcc \
- /usr/include/c++/16/x86_64-pc-linux-gnu/bits/opt_random.h \
- /usr/include/c++/16/bits/random.tcc /usr/include/c++/16/numeric \
- /usr/include/c++/16/bits/stl_numeric.h \
- /usr/include/c++/16/pstl/glue_numeric_defs.h \
+ /usr/include/c++/16/tr1/riemann_zeta.tcc /usr/include/c++/16/algorithm \
+ /usr/include/c++/16/bits/ranges_algo.h \
+ /usr/include/c++/16/pstl/glue_algorithm_defs.h \
  /usr/include/c++/16/pstl/execution_defs.h \
+ /home/salar/development/active/neural_network/src/LossFunctions.hpp \
  /home/salar/development/active/neural_network/src/math/Matrix.hpp \
  /usr/include/c++/16/functional /usr/include/c++/16/bits/refwrap.h \
  /usr/include/c++/16/bits/std_function.h \
@@ -197,8 +200,25 @@ CMakeFiles/neural_network.dir/src/Main.cpp.o: \
  /usr/include/c++/16/bits/hashtable.h \
  /usr/include/c++/16/bits/hashtable_policy.h \
  /usr/include/c++/16/ext/aligned_buffer.h \
- /usr/include/c++/16/bits/node_handle.h \
- /usr/include/c++/16/bits/binders.h /usr/include/c++/16/bits/funcwrap.h \
+ /usr/include/c++/16/bits/node_handle.h /usr/include/c++/16/vector \
+ /usr/include/c++/16/bits/stl_uninitialized.h \
+ /usr/include/c++/16/bits/stl_vector.h \
+ /usr/include/c++/16/bits/stl_bvector.h \
+ /usr/include/c++/16/bits/vector.tcc /usr/include/c++/16/bits/binders.h \
+ /usr/include/c++/16/bits/funcwrap.h \
  /usr/include/c++/16/bits/mofunc_impl.h \
- /home/salar/development/active/neural_network/src/activation/Identity.hpp \
- /home/salar/development/active/neural_network/src/activation/ActivationFunction.hpp
+ /home/salar/development/active/neural_network/src/math/NeuralNetwork.hpp \
+ /home/salar/development/active/neural_network/src/math/Layer.hpp \
+ /usr/include/c++/16/random /usr/include/c++/16/bits/random.h \
+ /usr/include/c++/16/x86_64-pc-linux-gnu/bits/opt_random.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/pmmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/emmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/xmmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mm_malloc.h \
+ /usr/include/c++/16/stdlib.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/mwaitintrin.h \
+ /usr/include/c++/16/bits/random.tcc /usr/include/c++/16/numeric \
+ /usr/include/c++/16/bits/stl_numeric.h \
+ /usr/include/c++/16/pstl/glue_numeric_defs.h \
+ /home/salar/development/active/neural_network/src/data/training_data.hpp

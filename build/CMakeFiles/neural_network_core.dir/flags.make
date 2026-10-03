@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/salar/development/active/neural_network/src -I/home/salar/development/active/neural_network/src/activation -I/home/salar/development/active/neural_network/src/math
+CXX_INCLUDES = -I/home/salar/development/active/neural_network/src -I/home/salar/development/active/neural_network/src/data -I/home/salar/development/active/neural_network/src/math
 
-CXX_FLAGS = -g -std=c++23
+CXX_FLAGS = -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow
 

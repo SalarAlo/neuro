@@ -72,28 +72,28 @@ include CMakeFiles/neural_network_core.dir/flags.make
 CMakeFiles/neural_network_core.dir/codegen:
 .PHONY : CMakeFiles/neural_network_core.dir/codegen
 
-CMakeFiles/neural_network_core.dir/src/Network.cpp.o: CMakeFiles/neural_network_core.dir/flags.make
-CMakeFiles/neural_network_core.dir/src/Network.cpp.o: /home/salar/development/active/neural_network/src/Network.cpp
-CMakeFiles/neural_network_core.dir/src/Network.cpp.o: CMakeFiles/neural_network_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/salar/development/active/neural_network/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/neural_network_core.dir/src/Network.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/neural_network_core.dir/src/Network.cpp.o -MF CMakeFiles/neural_network_core.dir/src/Network.cpp.o.d -o CMakeFiles/neural_network_core.dir/src/Network.cpp.o -c /home/salar/development/active/neural_network/src/Network.cpp
+CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o: CMakeFiles/neural_network_core.dir/flags.make
+CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o: /home/salar/development/active/neural_network/src/data/training_data.cpp
+CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o: CMakeFiles/neural_network_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/salar/development/active/neural_network/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o -MF CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o.d -o CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o -c /home/salar/development/active/neural_network/src/data/training_data.cpp
 
-CMakeFiles/neural_network_core.dir/src/Network.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/neural_network_core.dir/src/Network.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/salar/development/active/neural_network/src/Network.cpp > CMakeFiles/neural_network_core.dir/src/Network.cpp.i
+CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/salar/development/active/neural_network/src/data/training_data.cpp > CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.i
 
-CMakeFiles/neural_network_core.dir/src/Network.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/neural_network_core.dir/src/Network.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/salar/development/active/neural_network/src/Network.cpp -o CMakeFiles/neural_network_core.dir/src/Network.cpp.s
+CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/salar/development/active/neural_network/src/data/training_data.cpp -o CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.s
 
 # Object files for target neural_network_core
 neural_network_core_OBJECTS = \
-"CMakeFiles/neural_network_core.dir/src/Network.cpp.o"
+"CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o"
 
 # External object files for target neural_network_core
 neural_network_core_EXTERNAL_OBJECTS =
 
-libneural_network_core.a: CMakeFiles/neural_network_core.dir/src/Network.cpp.o
+libneural_network_core.a: CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o
 libneural_network_core.a: CMakeFiles/neural_network_core.dir/build.make
 libneural_network_core.a: CMakeFiles/neural_network_core.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/salar/development/active/neural_network/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libneural_network_core.a"

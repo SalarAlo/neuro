@@ -1,132 +1,197 @@
 #pragma once
 
+#include <print>
+
 #include <array>
 #include <cstddef>
 #include <functional>
-#include <stdexcept>
+#include <type_traits>
 
-namespace NeuralNetwork {
-
-template <typename T, std::size_t Rows, std::size_t Cols>
-class Matrix {
+template <std::size_t Rows, std::size_t Cols>
+struct Matrix {
 public:
-#pragma region ACCESS
-	[[nodiscard]]
-	T& operator[](std::size_t row, std::size_t col) {
-		return m_matrix[col + row * Cols];
-	}
+	Matrix() = default;
 
-	[[nodiscard]]
-	const T& operator[](std::size_t row, std::size_t col) const {
-		return m_matrix[col + row * Cols];
-	}
-
-	[[nodiscard]]
-	const T& at(std::size_t row, std::size_t col) const {
-		const auto idx { col + row * Cols };
-		if (idx >= Rows * Cols) {
-			throw std::out_of_range("Matrix Access beyond limits");
+	Matrix(std::array<std::array<float, Cols>, Rows> values) {
+		for (std::size_t row {}; row < Rows; ++row) {
+			for (std::size_t col {}; col < Cols; ++col) {
+				m_array[row * Cols + col] = values[row][col];
+			}
 		}
-		return m_matrix[idx];
 	}
 
-	[[nodiscard]]
-	T& at(std::size_t row, std::size_t col) {
-		const auto idx { col + row * Cols };
-		if (idx >= Rows * Cols) {
-			throw std::out_of_range("Matrix Access beyond limits");
-		}
-		return m_matrix[idx];
+	const float& get(std::size_t row, std::size_t col) const {
+		return m_array[row * Cols + col];
 	}
 
-#pragma endregion
+	float& get(std::size_t row, std::size_t col) {
+		return m_array[row * Cols + col];
+	}
 
-#pragma region OPERATORS
-	[[nodiscard]]
+	std::size_t get_rows() const { return Rows; }
+	std::size_t get_cols() const { return Cols; }
+
+	float& operator[](std::size_t row, std::size_t col) {
+		return m_array[row * Cols + col];
+	}
+
+	const float& operator[](std::size_t row, std::size_t col) const {
+		return m_array[row * Cols + col];
+	}
+
 	Matrix operator+(const Matrix& other) const {
-		Matrix m {};
-		for (std::size_t rows {}; rows < Rows; rows++) {
-			for (std::size_t cols {}; cols < Cols; cols++) {
-				m.at(rows, cols) = other.at(rows, cols) + at(rows, cols);
-			}
+		Matrix result {};
+
+		for (std::size_t i {}; i < Rows * Cols; ++i) {
+			result.m_array[i] = m_array[i] + other.m_array[i];
 		}
-		return m;
+
+		return result;
 	}
 
-	[[nodiscard]]
+	void operator+=(const Matrix& other) {
+		*this = *this + other;
+	}
+
 	Matrix operator-(const Matrix& other) const {
-		Matrix m {};
-		for (std::size_t rows {}; rows < Rows; rows++) {
-			for (std::size_t cols {}; cols < Cols; cols++) {
-				m.at(rows, cols) = at(rows, cols) - other.at(rows, cols);
-			}
+		Matrix result {};
+
+		for (std::size_t i {}; i < Rows * Cols; ++i) {
+			result.m_array[i] = m_array[i] - other.m_array[i];
 		}
-		return m;
+
+		return result;
 	}
 
-	[[nodiscard]]
-	Matrix operator*(T value) const {
-		Matrix m {};
-		for (std::size_t rows {}; rows < Rows; rows++) {
-			for (std::size_t cols {}; cols < Cols; cols++) {
-				m.at(rows, cols) = at(rows, cols) * value;
-			}
-		}
-		return m;
-	}
+	template <std::size_t OtherRows, std::size_t OtherCols>
+	Matrix<Rows, OtherCols> operator*(
+	    const Matrix<OtherRows, OtherCols>& other) const {
+		static_assert(
+		    Cols == OtherRows,
+		    "Incompatible dimensions: left columns must equal right rows.");
 
-	template <std::size_t OtherCols>
-	[[nodiscard]]
-	Matrix<T, Rows, OtherCols> operator*(const Matrix<T, Cols, OtherCols>& other) const {
-		Matrix<T, Rows, OtherCols> m {};
-		for (std::size_t y {}; y < Rows; y++) {
-			for (std::size_t x {}; x < OtherCols; x++) {
-				for (std::size_t k {}; k < Cols; k++) {
-					m.at(y, x) += at(y, k) * other.at(k, x);
+		Matrix<Rows, OtherCols> result {};
+
+		if constexpr (OtherCols == 1) {
+			for (std::size_t row {}; row < Rows; ++row) {
+				float sum {};
+
+				for (std::size_t k {}; k < Cols; ++k) {
+					sum += m_array[row * Cols + k] * other[k, 0];
+				}
+
+				result[row, 0] = sum;
+			}
+		} else {
+			for (std::size_t row {}; row < Rows; ++row) {
+				for (std::size_t k {}; k < Cols; ++k) {
+					const float value = m_array[row * Cols + k];
+
+					for (std::size_t col {}; col < OtherCols; ++col) {
+						result[row, col] += value * other[k, col];
+					}
 				}
 			}
 		}
-		return m;
+
+		return result;
 	}
 
-	[[nodiscard]]
-	Matrix<T, Cols, Rows> transpose() const {
-		Matrix<T, Cols, Rows> m {};
-		for (std::size_t row {}; row < Cols; row++) {
-			for (std::size_t col {}; col < Rows; col++) {
-				m.at(row, col) = at(col, row);
-			}
-		}
-		return m;
-	}
+	Matrix operator*(float scalar) const {
+		Matrix result {};
 
-	[[nodiscard]]
-	Matrix hadamard(const Matrix& other) const {
-		Matrix m {};
-		for (std::size_t row {}; row < Rows; row++) {
-			for (std::size_t col {}; col < Cols; col++) {
-				m.at(row, col) = at(row, col) * other.at(row, col);
-			}
-		}
-		return m;
-	}
-
-	[[nodiscard]]
-	Matrix transform(std::function<T(T value)> f) const {
-		Matrix m {};
-
-		for (std::size_t row {}; row < Rows; row++) {
-			for (std::size_t col {}; col < Cols; col++) {
-				m.at(row, col) = f(at(row, col));
-			}
+		for (std::size_t i {}; i < Rows * Cols; ++i) {
+			result.m_array[i] = m_array[i] * scalar;
 		}
 
-		return m;
+		return result;
 	}
-#pragma endregion
+
+	Matrix operator/(float scalar) const {
+		return operator*(1.0f / scalar);
+	}
+
+	template <typename Fn>
+	        requires(
+	            std::is_invocable_r_v<
+	                float, Fn&, std::size_t, std::size_t>
+	            || std::is_invocable_r_v<float, Fn&, float>)
+	Matrix apply(Fn&& fn) const {
+		Matrix result {};
+
+		if constexpr (
+		    std::is_invocable_r_v<
+		        float, Fn&, std::size_t, std::size_t>) {
+			for (std::size_t row {}; row < Rows; ++row) {
+				for (std::size_t col {}; col < Cols; ++col) {
+					result.m_array[row * Cols + col] = std::invoke(fn, row, col);
+				}
+			}
+		} else {
+			for (std::size_t i {}; i < Rows * Cols; ++i) {
+				result.m_array[i] = std::invoke(fn, m_array[i]);
+			}
+		}
+
+		return result;
+	}
+
+	template <typename Fn>
+	        requires(
+	            std::is_invocable_r_v<
+	                void, Fn&, std::size_t, std::size_t>
+	            || std::is_invocable_r_v<void, Fn&, float>)
+	void for_every(Fn&& fn) const {
+		if constexpr (
+		    std::is_invocable_r_v<
+		        float, Fn&, std::size_t, std::size_t>) {
+			for (std::size_t row {}; row < Rows; ++row) {
+				for (std::size_t col {}; col < Cols; ++col) {
+					std::invoke(fn, row, col);
+				}
+			}
+		} else {
+			for (std::size_t i {}; i < Rows * Cols; ++i) {
+				std::invoke(fn, m_array[i]);
+			}
+		}
+	}
+
+	Matrix<Cols, Rows> transpose() const {
+		Matrix<Cols, Rows> result {};
+
+		for (std::size_t row {}; row < Rows; ++row) {
+			for (std::size_t col {}; col < Cols; ++col) {
+				result[col, row] = m_array[row * Cols + col];
+			}
+		}
+
+		return result;
+	}
+
+	void clear() {
+		*this = *this - *this;
+	}
+
+	void print() const {
+		std::println("MATRIX {}X{}", Rows, Cols);
+
+		for (std::size_t row {}; row < Rows; ++row) {
+			std::print("[ ");
+
+			for (std::size_t col {}; col < Cols; ++col) {
+				std::print(
+				    "{:>5}{}",
+				    get(row, col),
+				    col + 1 < Cols ? ", " : "");
+			}
+
+			std::println(" ]");
+		}
+
+		std::println("__________________");
+	}
 
 private:
-	std::array<T, Rows * Cols> m_matrix {};
+	std::array<float, Rows * Cols> m_array {};
 };
-
-}

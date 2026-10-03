@@ -167,29 +167,29 @@ src/Main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network.dir/build.make CMakeFiles/neural_network.dir/src/Main.cpp.s
 .PHONY : src/Main.cpp.s
 
-src/Network.o: src/Network.cpp.o
-.PHONY : src/Network.o
+src/data/training_data.o: src/data/training_data.cpp.o
+.PHONY : src/data/training_data.o
 
 # target to build an object file
-src/Network.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_core.dir/build.make CMakeFiles/neural_network_core.dir/src/Network.cpp.o
-.PHONY : src/Network.cpp.o
+src/data/training_data.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_core.dir/build.make CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o
+.PHONY : src/data/training_data.cpp.o
 
-src/Network.i: src/Network.cpp.i
-.PHONY : src/Network.i
+src/data/training_data.i: src/data/training_data.cpp.i
+.PHONY : src/data/training_data.i
 
 # target to preprocess a source file
-src/Network.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_core.dir/build.make CMakeFiles/neural_network_core.dir/src/Network.cpp.i
-.PHONY : src/Network.cpp.i
+src/data/training_data.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_core.dir/build.make CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.i
+.PHONY : src/data/training_data.cpp.i
 
-src/Network.s: src/Network.cpp.s
-.PHONY : src/Network.s
+src/data/training_data.s: src/data/training_data.cpp.s
+.PHONY : src/data/training_data.s
 
 # target to generate assembly for a file
-src/Network.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_core.dir/build.make CMakeFiles/neural_network_core.dir/src/Network.cpp.s
-.PHONY : src/Network.cpp.s
+src/data/training_data.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/neural_network_core.dir/build.make CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.s
+.PHONY : src/data/training_data.cpp.s
 
 # Help Target
 help:
@@ -204,9 +204,9 @@ help:
 	@echo "... src/Main.o"
 	@echo "... src/Main.i"
 	@echo "... src/Main.s"
-	@echo "... src/Network.o"
-	@echo "... src/Network.i"
-	@echo "... src/Network.s"
+	@echo "... src/data/training_data.o"
+	@echo "... src/data/training_data.i"
+	@echo "... src/data/training_data.s"
 .PHONY : help
 
 

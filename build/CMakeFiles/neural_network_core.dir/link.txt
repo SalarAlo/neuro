@@ -1,2 +1,2 @@
-/usr/bin/ar qc libneural_network_core.a CMakeFiles/neural_network_core.dir/src/Network.cpp.o
+/usr/bin/ar qc libneural_network_core.a CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o
 /usr/bin/ranlib libneural_network_core.a

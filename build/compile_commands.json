@@ -1,13 +1,13 @@
 [
 {
   "directory": "/home/salar/development/active/neural_network/build",
-  "command": "/usr/bin/c++  -I/home/salar/development/active/neural_network/src -I/home/salar/development/active/neural_network/src/activation -I/home/salar/development/active/neural_network/src/math -g -std=c++23 -o CMakeFiles/neural_network_core.dir/src/Network.cpp.o -c /home/salar/development/active/neural_network/src/Network.cpp",
-  "file": "/home/salar/development/active/neural_network/src/Network.cpp",
-  "output": "CMakeFiles/neural_network_core.dir/src/Network.cpp.o"
+  "command": "/usr/bin/c++  -I/home/salar/development/active/neural_network/src -I/home/salar/development/active/neural_network/src/data -I/home/salar/development/active/neural_network/src/math -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -o CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o -c /home/salar/development/active/neural_network/src/data/training_data.cpp",
+  "file": "/home/salar/development/active/neural_network/src/data/training_data.cpp",
+  "output": "CMakeFiles/neural_network_core.dir/src/data/training_data.cpp.o"
 },
 {
   "directory": "/home/salar/development/active/neural_network/build",
-  "command": "/usr/bin/c++  -I/home/salar/development/active/neural_network/src -I/home/salar/development/active/neural_network/src/activation -I/home/salar/development/active/neural_network/src/math -g -std=c++23 -o CMakeFiles/neural_network.dir/src/Main.cpp.o -c /home/salar/development/active/neural_network/src/Main.cpp",
+  "command": "/usr/bin/c++  -I/home/salar/development/active/neural_network/src -I/home/salar/development/active/neural_network/src/data -I/home/salar/development/active/neural_network/src/math -O3 -DNDEBUG -std=c++23 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wshadow -O3 -march=native -DNDEBUG -o CMakeFiles/neural_network.dir/src/Main.cpp.o -c /home/salar/development/active/neural_network/src/Main.cpp",
   "file": "/home/salar/development/active/neural_network/src/Main.cpp",
   "output": "CMakeFiles/neural_network.dir/src/Main.cpp.o"
 }

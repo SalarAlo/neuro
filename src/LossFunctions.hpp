@@ -1,9 +1,13 @@
+#include <cmath>
+
+#include <concepts>
 #include <cstddef>
 
 #include "Matrix.hpp"
 
-struct MeanSquaredError {
+struct LossFn { };
 
+struct MeanSquaredError : public LossFn {
 	template <std::size_t N>
 	static float loss(const Matrix<N, 1>& output, const Matrix<N, 1>& target) {
 		const auto difference { output - target };
@@ -22,3 +26,6 @@ struct MeanSquaredError {
 		return (output - target) / static_cast<float>(N);
 	}
 };
+
+template <typename T>
+concept IsLossFn = std::derived_from<T, LossFn>;

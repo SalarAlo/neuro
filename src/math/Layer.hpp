@@ -41,14 +41,13 @@ public:
 		InputVector input_gradient {};
 
 		for (std::size_t row {}; row < OutputNeurons; ++row) {
-			const float delta { output_gradient[row, 0] * m_activation_fn.derivative(m_last_z[row, 0]) };
-
-			const float step { learning_rate * delta };
+			const float error { output_gradient[row, 0] * m_activation_fn.derivative(m_last_z[row, 0]) };
+			const float step { learning_rate * error };
 
 			for (std::size_t col {}; col < InputNeurons; ++col) {
 				float& weight = m_weights[row, col];
 
-				input_gradient[col, 0] += weight * delta;
+				input_gradient[col, 0] += weight * error;
 
 				weight -= step * m_last_input[col, 0];
 			}

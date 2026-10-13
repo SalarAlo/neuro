@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/neural_network.dir/link.d CMakeFiles/neural_network.dir/src/Main.cpp.o -o neural_network  libneural_network_core.a

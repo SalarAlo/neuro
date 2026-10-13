@@ -66,9 +66,7 @@ public:
 	template <std::size_t OtherRows, std::size_t OtherCols>
 	Matrix<Rows, OtherCols> operator*(
 	    const Matrix<OtherRows, OtherCols>& other) const {
-		static_assert(
-		    Cols == OtherRows,
-		    "Incompatible dimensions: left columns must equal right rows.");
+		static_assert(Cols == OtherRows, "Incompatible dimensions: left columns must equal right rows.");
 
 		Matrix<Rows, OtherCols> result {};
 

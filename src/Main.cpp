@@ -7,7 +7,7 @@
 #include "Model.hpp"
 #include "NeuralNetwork.hpp"
 
-#include "data/training_data.hpp"
+#include "data/TrainingData.hpp"
 
 int main() {
 	constexpr float LEARNING_RATE { 0.01f };
@@ -23,14 +23,14 @@ int main() {
 
 	Model<Network, MeanSquaredError> model {};
 
-	const auto count { reader.get_meta_data().number_of_images };
+	auto count { reader.get_train_meta_data().number_of_images };
 
 	for (std::size_t epoch {}; epoch < EPOCHS; ++epoch) {
 		double total_loss { 0.0 };
 
 		for (std::size_t i {}; i < count; ++i) {
-			const auto input { reader.get_image(i) };
-			const auto label { reader.get_label(i) };
+			const auto input { reader.get_train_image(i) };
+			const auto label { reader.get_train_label(i) };
 
 			Matrix<DIGITS, 1> target {};
 			target[label, 0] = 1.0f;
@@ -38,14 +38,12 @@ int main() {
 			total_loss += model.train(input, target, LEARNING_RATE);
 		}
 
-		std::println(
-		    "Epoch {}: mean loss = {}",
-		    epoch + 1,
-		    total_loss / count);
+		std::println("Epoch {}: mean loss = {}", epoch + 1, total_loss / count);
 	}
 
+	count = reader.get_test_meta_data().number_of_images;
 	for (;;) {
-		std::print("Enter image index (0–{}), or -1 to quit: ", count - 1);
+		std::print("Enter image index (0–{}), or -1 to quit: ", count);
 		std::cout << std::flush;
 
 		long long index {};
@@ -59,9 +57,9 @@ int main() {
 
 		const auto image_index { static_cast<std::size_t>(index) };
 
-		reader.print_image(image_index);
+		reader.print_test_image(image_index);
 
-		const auto output { model.predict(reader.get_image(image_index)) };
+		const auto output { model.predict(reader.get_test_image(image_index)) };
 
 		std::size_t prediction {};
 		for (std::size_t digit { 1 }; digit < DIGITS; ++digit) {
@@ -69,7 +67,6 @@ int main() {
 				prediction = digit;
 		}
 
-		std::println("Prediction: {} | Actual label: {}", prediction,
-		    static_cast<unsigned>(reader.get_label(image_index)));
+		std::println("Prediction: {} | Actual label: {}", prediction, static_cast<unsigned>(reader.get_test_label(image_index)));
 	}
 }

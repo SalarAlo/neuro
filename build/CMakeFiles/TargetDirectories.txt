@@ -1,4 +1,0 @@
-/home/salar/development/active/neural_network/build/CMakeFiles/neural_network_core.dir
-/home/salar/development/active/neural_network/build/CMakeFiles/neural_network.dir
-/home/salar/development/active/neural_network/build/CMakeFiles/edit_cache.dir
-/home/salar/development/active/neural_network/build/CMakeFiles/rebuild_cache.dir

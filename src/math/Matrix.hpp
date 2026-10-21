@@ -7,6 +7,8 @@
 #include <functional>
 #include <type_traits>
 
+namespace Neuro {
+
 template <std::size_t Rows, std::size_t Cols>
 struct Matrix {
 public:
@@ -193,3 +195,5 @@ public:
 private:
 	std::array<float, Rows * Cols> m_array {};
 };
+
+} // namespace Neuro

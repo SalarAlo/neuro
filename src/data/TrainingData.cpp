@@ -7,6 +7,8 @@
 
 #include "TrainingData.hpp"
 
+namespace Neuro {
+
 namespace {
 constexpr std::size_t image_header_size { 16 };
 constexpr std::size_t label_header_size { 8 };
@@ -142,3 +144,5 @@ std::uint8_t TrainingDataReader::get_test_label(std::size_t index) const {
 void TrainingDataReader::print_test_image(std::size_t index) const {
 	m_test_data.print_image(index);
 }
+
+} // namespace Neuro

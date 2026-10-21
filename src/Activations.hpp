@@ -4,6 +4,8 @@
 
 #include <algorithm>
 
+namespace Neuro {
+
 struct Identity {
 	float operator()(float x) {
 		return x;
@@ -34,3 +36,5 @@ struct Sigmoid {
 		return y * (1.0f - y);
 	}
 };
+
+} // namespace Neuro

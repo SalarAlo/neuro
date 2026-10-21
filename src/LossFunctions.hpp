@@ -1,9 +1,13 @@
+#pragma once
+
 #include <cmath>
 
 #include <concepts>
 #include <cstddef>
 
 #include "Matrix.hpp"
+
+namespace Neuro {
 
 struct LossFn { };
 
@@ -29,3 +33,5 @@ struct MeanSquaredError : public LossFn {
 
 template <typename T>
 concept IsLossFn = std::derived_from<T, LossFn>;
+
+} // namespace Neuro

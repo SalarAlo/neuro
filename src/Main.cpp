@@ -10,24 +10,24 @@
 #include "data/TrainingData.hpp"
 
 int main() {
-	TrainingDataReader reader {};
+	Neuro::TrainingDataReader reader {};
 
-	using Network = NeuralNetwork<
-	    Layer<28 * 28, 128, Relu>,
-	    Layer<128, 64, Relu>,
-	    Layer<64, 10, Sigmoid>>;
+	using Network = Neuro::NeuralNetwork<
+	    Neuro::Layer<28 * 28, 128, Neuro::Relu>,
+	    Neuro::Layer<128, 64, Neuro::Relu>,
+	    Neuro::Layer<64, 10, Neuro::Sigmoid>>;
 
-	Model<Network, MeanSquaredError> model {};
+	Neuro::Model<Network, Neuro::MeanSquaredError> model {};
 
 	auto count { reader.get_train_meta_data().number_of_images };
 
-	TrainingConfig config {
+	Neuro::TrainingConfig config {
 		.epochs = 3,
 		.batch_size = 1,
 		.learning_rate = 0.01f,
 	};
 
-	model.fit(MNISTDataset { reader }, config);
+	model.fit(Neuro::MNISTDataset { reader }, config);
 
 	count = reader.get_test_meta_data().number_of_images;
 	for (;;) {
@@ -50,7 +50,7 @@ int main() {
 		const auto output { model.predict(reader.get_test_image(image_index)) };
 
 		std::size_t prediction {};
-		for (std::size_t digit { 0 }; digit < MNISTDataset::TargetType::get_rows(); ++digit) {
+		for (std::size_t digit { 0 }; digit < Neuro::MNISTDataset::TargetType::get_rows(); ++digit) {
 			if (output[digit, 0] > output[prediction, 0])
 				prediction = digit;
 		}

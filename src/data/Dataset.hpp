@@ -1,7 +1,11 @@
+#pragma once
+
 #include <concepts>
 
 #include "Matrix.hpp"
 #include "TrainingData.hpp"
+
+namespace Neuro {
 
 template <typename T>
 concept Dataset = requires(const T& dataset, std::size_t index) {
@@ -42,3 +46,5 @@ public:
 private:
 	const TrainingDataReader& m_reader;
 };
+
+} // namespace Neuro

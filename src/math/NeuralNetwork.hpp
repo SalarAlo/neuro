@@ -5,6 +5,8 @@
 
 #include "Layer.hpp"
 
+namespace Neuro {
+
 template <LayerConcept InputLayer, LayerConcept... Layers>
         requires NetworkLayerArrangement<InputLayer, Layers...>
 class NeuralNetwork {
@@ -43,3 +45,5 @@ public:
 private:
 	LayerTuple m_layers {};
 };
+
+} // namespace Neuro

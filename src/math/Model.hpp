@@ -1,7 +1,11 @@
+#pragma once
+
 #include <cstddef>
 
 #include "Dataset.hpp"
 #include "TrainingData.hpp"
+
+namespace Neuro {
 
 struct TrainingConfig {
 	std::size_t epochs {};
@@ -28,7 +32,7 @@ public:
 		for (std::size_t epoch {}; epoch < config.epochs; ++epoch) {
 			double total_loss {};
 
-			const typename D::TargetType gradient {};
+			typename D::TargetType gradient {};
 			for (std::size_t i {}; i < count; ++i) {
 				const auto input = dataset.get_input(i);
 				const auto target = dataset.get_target(i);
@@ -39,7 +43,7 @@ public:
 
 				if (i % config.batch_size == 0 && i != 0) {
 					m_network.backward(gradient, config.learning_rate);
-					gradient *= 0;
+					gradient.clear();
 				}
 
 				total_loss += loss;
@@ -53,3 +57,5 @@ private:
 private:
 	Network m_network {};
 };
+
+} // namespace Neuro

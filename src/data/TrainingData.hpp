@@ -7,6 +7,8 @@
 
 #include "Matrix.hpp"
 
+namespace Neuro {
+
 struct TrainingMetaData {
 	std::uint32_t magic_number {};
 	std::uint32_t number_of_images {};
@@ -52,3 +54,5 @@ private:
 	TrainingData m_train_data;
 	TrainingData m_test_data;
 };
+
+} // namespace Neuro

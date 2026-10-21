@@ -7,6 +7,8 @@
 
 #include "Matrix.hpp"
 
+namespace Neuro {
+
 template <std::size_t InputNeurons, std::size_t OutputNeurons, typename ActivationFn>
 class Layer {
 public:
@@ -90,3 +92,5 @@ concept NetworkLayerArrangement = requires {
 		    && ...);
 	}(std::make_index_sequence<sizeof...(Ts) - 1> {}));
 };
+
+} // namespace Neuro

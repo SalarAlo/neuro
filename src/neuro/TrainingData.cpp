@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <string_view>
 
-#include "TrainingData.hpp"
+#include "neuro/TrainingData.hpp"
 
 namespace Neuro {
 

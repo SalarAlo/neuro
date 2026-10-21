@@ -2,8 +2,7 @@
 
 #include <cstddef>
 
-#include "Dataset.hpp"
-#include "TrainingData.hpp"
+#include "neuro/Dataset.hpp"
 
 namespace Neuro {
 

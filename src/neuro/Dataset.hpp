@@ -2,8 +2,8 @@
 
 #include <concepts>
 
-#include "Matrix.hpp"
-#include "TrainingData.hpp"
+#include "neuro/Matrix.hpp"
+#include "neuro/TrainingData.hpp"
 
 namespace Neuro {
 

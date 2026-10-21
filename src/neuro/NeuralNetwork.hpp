@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <tuple>
 
-#include "Layer.hpp"
+#include "neuro/Layer.hpp"
 
 namespace Neuro {
 

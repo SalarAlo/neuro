@@ -2,12 +2,11 @@
 
 #include <iostream>
 
-#include "Activations.hpp"
-#include "LossFunctions.hpp"
-#include "Model.hpp"
-#include "NeuralNetwork.hpp"
-
-#include "data/TrainingData.hpp"
+#include "neuro/Activations.hpp"
+#include "neuro/LossFunctions.hpp"
+#include "neuro/Model.hpp"
+#include "neuro/NeuralNetwork.hpp"
+#include "neuro/TrainingData.hpp"
 
 int main() {
 	Neuro::TrainingDataReader reader {};

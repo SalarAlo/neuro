@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 
-#include "Matrix.hpp"
+#include "neuro/Matrix.hpp"
 
 namespace Neuro {
 

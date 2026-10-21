@@ -36,22 +36,6 @@ file(GLOB_RECURSE SOURCE_FILES
 # Main.cpp belongs only to the executable.
 list(FILTER SOURCE_FILES EXCLUDE REGEX "[/\\\\]Main\\.cpp$")
 
-file(GLOB_RECURSE ALL_PATHS
-    LIST_DIRECTORIES true
-    CONFIGURE_DEPENDS
-    "${SRC_DIR}/*"
-)
-
-set(INCLUDE_DIRS "${SRC_DIR}")
-
-foreach(path IN LISTS ALL_PATHS)
-    if(IS_DIRECTORY "${path}")
-        list(APPEND INCLUDE_DIRS "${path}")
-    endif()
-endforeach()
-
-list(REMOVE_DUPLICATES INCLUDE_DIRS)
-
 # Core library
 
 if(SOURCE_FILES)
@@ -59,7 +43,7 @@ if(SOURCE_FILES)
 
     target_include_directories(neuro_core
         PUBLIC
-            ${INCLUDE_DIRS}
+            "${SRC_DIR}"
     )
     target_compile_features(neuro_core PUBLIC cxx_std_23)
 
@@ -73,7 +57,7 @@ else()
 
     target_include_directories(neuro_core
         INTERFACE
-            ${INCLUDE_DIRS}
+            "${SRC_DIR}"
     )
     target_compile_features(neuro_core INTERFACE cxx_std_23)
 endif()

@@ -5,7 +5,7 @@
 #include <concepts>
 #include <cstddef>
 
-#include "Matrix.hpp"
+#include "neuro/Matrix.hpp"
 
 namespace Neuro {
 

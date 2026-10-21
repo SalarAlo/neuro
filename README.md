@@ -29,6 +29,6 @@ add_subdirectory(vendor/neuro)
 target_link_libraries(your_app PRIVATE Neuro::core)
 ```
 
-Your code can include headers such as `NeuralNetwork.hpp`, `Layer.hpp`, and `Activations.hpp`. Public types live in the `Neuro` namespace; for example, `Neuro::Matrix<2, 2>` and `Neuro::Relu`. The MNIST example executable is built only when this repository is the top-level project.
+Include library headers through the `neuro/` prefix, for example `#include "neuro/Matrix.hpp"`, `#include "neuro/NeuralNetwork.hpp"`, or `#include "neuro/Activations.hpp"`. Public types live in the `Neuro` namespace; for example, `Neuro::Matrix<2, 2>` and `Neuro::Relu`. The MNIST example executable is built only when this repository is the top-level project.
 
 To pull a newer version later, run `git submodule update --remote vendor/neuro`, then commit the updated submodule pointer in the other project. After cloning that project, run `git submodule update --init --recursive` to fetch its submodules.

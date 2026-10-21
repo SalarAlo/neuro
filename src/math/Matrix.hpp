@@ -28,8 +28,8 @@ public:
 		return m_array[row * Cols + col];
 	}
 
-	std::size_t get_rows() const { return Rows; }
-	std::size_t get_cols() const { return Cols; }
+	static std::size_t get_rows() { return Rows; }
+	static std::size_t get_cols() { return Cols; }
 
 	float& operator[](std::size_t row, std::size_t col) {
 		return m_array[row * Cols + col];

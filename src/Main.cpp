@@ -10,10 +10,6 @@
 #include "data/TrainingData.hpp"
 
 int main() {
-	constexpr float LEARNING_RATE { 0.01f };
-	constexpr std::size_t DIGITS { 10 };
-	constexpr std::size_t EPOCHS { 10 };
-
 	TrainingDataReader reader {};
 
 	using Network = NeuralNetwork<
@@ -25,21 +21,13 @@ int main() {
 
 	auto count { reader.get_train_meta_data().number_of_images };
 
-	for (std::size_t epoch {}; epoch < EPOCHS; ++epoch) {
-		double total_loss { 0.0 };
+	TrainingConfig config {
+		.epochs = 3,
+		.batch_size = 1,
+		.learning_rate = 0.01f,
+	};
 
-		for (std::size_t i {}; i < count; ++i) {
-			const auto input { reader.get_train_image(i) };
-			const auto label { reader.get_train_label(i) };
-
-			Matrix<DIGITS, 1> target {};
-			target[label, 0] = 1.0f;
-
-			total_loss += model.train(input, target, LEARNING_RATE);
-		}
-
-		std::println("Epoch {}: mean loss = {}", epoch + 1, total_loss / count);
-	}
+	model.fit(MNISTDataset { reader }, config);
 
 	count = reader.get_test_meta_data().number_of_images;
 	for (;;) {
@@ -62,7 +50,7 @@ int main() {
 		const auto output { model.predict(reader.get_test_image(image_index)) };
 
 		std::size_t prediction {};
-		for (std::size_t digit { 1 }; digit < DIGITS; ++digit) {
+		for (std::size_t digit { 0 }; digit < MNISTDataset::TargetType::get_rows(); ++digit) {
 			if (output[digit, 0] > output[prediction, 0])
 				prediction = digit;
 		}

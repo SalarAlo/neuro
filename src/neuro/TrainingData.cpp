@@ -10,36 +10,36 @@
 namespace Neuro {
 
 namespace {
-constexpr std::size_t image_header_size { 16 };
-constexpr std::size_t label_header_size { 8 };
-constexpr std::size_t image_size { 28 * 28 };
+	constexpr std::size_t image_header_size { 16 };
+	constexpr std::size_t label_header_size { 8 };
+	constexpr std::size_t image_size { 28 * 28 };
 
-std::uint32_t read_big_endian_u32(const std::uint8_t* bytes) {
-	return (static_cast<std::uint32_t>(bytes[0]) << 24)
-	    | (static_cast<std::uint32_t>(bytes[1]) << 16)
-	    | (static_cast<std::uint32_t>(bytes[2]) << 8)
-	    | static_cast<std::uint32_t>(bytes[3]);
+	std::uint32_t read_big_endian_u32(const std::uint8_t* bytes) {
+		return (static_cast<std::uint32_t>(bytes[0]) << 24)
+		    | (static_cast<std::uint32_t>(bytes[1]) << 16)
+		    | (static_cast<std::uint32_t>(bytes[2]) << 8)
+		    | static_cast<std::uint32_t>(bytes[3]);
+	}
+
+	std::vector<std::uint8_t> read_file(std::ifstream& file) {
+		if (!file)
+			throw std::runtime_error("Could not open data file.");
+
+		std::vector<std::uint8_t> result {
+			std::istreambuf_iterator<char> { file },
+			std::istreambuf_iterator<char> {}
+		};
+		if (file.bad())
+			throw std::runtime_error("Could not read data file.");
+		return result;
+	}
+
+	TrainingData load_data(const char* image_path, const char* label_path) {
+		std::ifstream images { image_path, std::ios::binary };
+		std::ifstream labels { label_path, std::ios::binary };
+		return TrainingData { images, labels };
+	}
 }
-
-std::vector<std::uint8_t> read_file(std::ifstream& file) {
-	if (!file)
-		throw std::runtime_error("Could not open data file.");
-
-	std::vector<std::uint8_t> result {
-		std::istreambuf_iterator<char> { file },
-		std::istreambuf_iterator<char> {}
-	};
-	if (file.bad())
-		throw std::runtime_error("Could not read data file.");
-	return result;
-}
-
-TrainingData load_data(const char* image_path, const char* label_path) {
-	std::ifstream images { image_path, std::ios::binary };
-	std::ifstream labels { label_path, std::ios::binary };
-	return TrainingData { images, labels };
-}
-} // namespace
 
 TrainingMetaData::TrainingMetaData(const std::uint8_t* bytes)
     : magic_number { read_big_endian_u32(bytes) }
@@ -145,4 +145,4 @@ void TrainingDataReader::print_test_image(std::size_t index) const {
 	m_test_data.print_image(index);
 }
 
-} // namespace Neuro
+}

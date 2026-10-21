@@ -55,4 +55,4 @@ private:
 	TrainingData m_test_data;
 };
 
-} // namespace Neuro
+}

@@ -49,7 +49,7 @@ int main() {
 		const auto output { model.predict(reader.get_test_image(image_index)) };
 
 		std::size_t prediction {};
-		for (std::size_t digit { 0 }; digit < Neuro::MNISTDataset::TargetType::get_rows(); ++digit) {
+		for (std::size_t digit { 0 }; digit < Neuro::MNISTDataset::TargetType::ROWS_AMOUNT; ++digit) {
 			if (output[digit, 0] > output[prediction, 0])
 				prediction = digit;
 		}

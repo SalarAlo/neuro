@@ -57,4 +57,4 @@ private:
 	Network m_network {};
 };
 
-} // namespace Neuro
+}

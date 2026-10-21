@@ -93,4 +93,4 @@ concept NetworkLayerArrangement = requires {
 	}(std::make_index_sequence<sizeof...(Ts) - 1> {}));
 };
 
-} // namespace Neuro
+}

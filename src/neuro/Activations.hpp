@@ -37,4 +37,4 @@ struct Sigmoid {
 	}
 };
 
-} // namespace Neuro
+}

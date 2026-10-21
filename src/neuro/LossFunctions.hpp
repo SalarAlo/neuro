@@ -34,4 +34,4 @@ struct MeanSquaredError : public LossFn {
 template <typename T>
 concept IsLossFn = std::derived_from<T, LossFn>;
 
-} // namespace Neuro
+}

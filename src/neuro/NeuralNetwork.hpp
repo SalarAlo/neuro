@@ -46,4 +46,4 @@ private:
 	LayerTuple m_layers {};
 };
 
-} // namespace Neuro
+}

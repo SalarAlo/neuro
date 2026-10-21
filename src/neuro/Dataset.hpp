@@ -47,4 +47,4 @@ private:
 	const TrainingDataReader& m_reader;
 };
 
-} // namespace Neuro
+}

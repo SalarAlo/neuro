@@ -30,8 +30,8 @@ public:
 		return m_array[row * Cols + col];
 	}
 
-	static std::size_t get_rows() { return Rows; }
-	static std::size_t get_cols() { return Cols; }
+	static constexpr std::size_t ROWS_AMOUNT { Rows };
+	static constexpr std::size_t COLS_AMOUNT { Cols };
 
 	float& operator[](std::size_t row, std::size_t col) {
 		return m_array[row * Cols + col];
@@ -192,8 +192,14 @@ public:
 		std::println("__________________");
 	}
 
+	float* begin() { return m_array.begin(); }
+	const float* begin() const { return m_array.begin(); }
+
+	float* end() { return m_array.begin(); }
+	const float* end() const { return m_array.begin(); }
+
 private:
 	std::array<float, Rows * Cols> m_array {};
 };
 
-} // namespace Neuro
+}

@@ -39,25 +39,35 @@ public:
 		return m_last_z.apply(m_activation_fn);
 	}
 
-	InputVector backward(const OutputVector& output_gradient, float learning_rate) {
+	InputVector backward(const OutputVector& output_gradient) {
 		InputVector input_gradient {};
 
 		for (std::size_t row {}; row < OutputNeurons; ++row) {
 			const float error { output_gradient[row, 0] * m_activation_fn.derivative(m_last_z[row, 0]) };
-			const float step { learning_rate * error };
 
 			for (std::size_t col {}; col < InputNeurons; ++col) {
-				float& weight = m_weights[row, col];
-
-				input_gradient[col, 0] += weight * error;
-
-				weight -= step * m_last_input[col, 0];
+				input_gradient[col, 0] += m_weights[row, col] * error;
+				m_weight_gradients[row, col] += error * m_last_input[col, 0];
 			}
 
-			m_biases[row, 0] -= step;
+			m_bias_gradients[row, 0] += error;
 		}
 
 		return input_gradient;
+	}
+
+	void step(float learning_rate) {
+		for (std::size_t row {}; row < OutputNeurons; ++row) {
+			for (std::size_t col {}; col < InputNeurons; ++col)
+				m_weights[row, col] -= learning_rate * m_weight_gradients[row, col];
+
+			m_biases[row, 0] -= learning_rate * m_bias_gradients[row, 0];
+		}
+	}
+
+	void zero_grad() {
+		m_weight_gradients = {};
+		m_bias_gradients = {};
 	}
 
 private:
@@ -66,6 +76,8 @@ private:
 
 	OutputVector m_biases {};
 	Matrix<OutputNeurons, InputNeurons> m_weights {};
+	OutputVector m_bias_gradients {};
+	Matrix<OutputNeurons, InputNeurons> m_weight_gradients {};
 
 	ActivationFn m_activation_fn {};
 };

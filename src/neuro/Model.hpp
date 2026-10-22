@@ -28,27 +28,38 @@ public:
 	void fit(const D& dataset, const TrainingConfig& config) {
 		const auto count = dataset.size();
 
-		for (std::size_t epoch {}; epoch < config.epochs; ++epoch) {
+		for (std::size_t epoch = 0; epoch < config.epochs; ++epoch) {
 			double total_loss {};
 
-			typename D::TargetType gradient {};
-			for (std::size_t i {}; i < count; ++i) {
+			for (std::size_t i = 0; i < count; ++i) {
 				const auto input = dataset.get_input(i);
 				const auto target = dataset.get_target(i);
 
-				const auto output { m_network.forward(input) };
-				const auto loss { Loss::loss(output, target) };
-				gradient += Loss::gradient(output, target) / static_cast<float>(config.batch_size);
+				const auto output = m_network.forward(input);
 
-				if (i % config.batch_size == 0 && i != 0) {
-					m_network.backward(gradient, config.learning_rate);
-					gradient.clear();
+				total_loss += Loss::loss(output, target);
+
+				const auto gradient = Loss::gradient(output, target);
+
+				m_network.backward(gradient);
+
+				const bool batch_complete = (i + 1) % config.batch_size == 0;
+
+				const bool last_sample = i + 1 == count;
+
+				if (batch_complete || last_sample) {
+					const auto batch_count = (i % config.batch_size) + 1;
+
+					m_network.step(config.learning_rate / static_cast<float>(batch_count));
+
+					m_network.zero_grad();
 				}
-
-				total_loss += loss;
 			}
 
-			std::println("Epoch {}: mean loss = {}", epoch + 1, total_loss / static_cast<float>(count));
+			std::println(
+			    "Epoch {}: mean loss = {}",
+			    epoch + 1,
+			    total_loss / static_cast<double>(count));
 		}
 	}
 

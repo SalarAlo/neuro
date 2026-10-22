@@ -32,14 +32,30 @@ public:
 	}
 
 	template <std::size_t I = LayersAmount, typename Gradient = OutputVector>
-	auto backward(const Gradient& gradient, float learning_rate) {
+	auto backward(const Gradient& gradient) {
 		if constexpr (I > 0) {
-			auto input_gradient { std::get<I - 1>(m_layers).backward(gradient, learning_rate) };
+			auto input_gradient {
+				std::get<I - 1>(m_layers).backward(gradient)
+			};
 
-			return backward<I - 1>(input_gradient, learning_rate);
+			return backward<I - 1>(input_gradient);
 		} else {
 			return gradient;
 		}
+	}
+
+	void step(float learning_rate) {
+		std::apply([learning_rate](auto&... layers) {
+			(layers.step(learning_rate), ...);
+		},
+		    m_layers);
+	}
+
+	void zero_grad() {
+		std::apply([](auto&... layers) {
+			(layers.zero_grad(), ...);
+		},
+		    m_layers);
 	}
 
 private:

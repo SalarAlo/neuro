@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <concepts>
 
 #include "neuro/Matrix.hpp"
@@ -23,11 +24,13 @@ public:
 	using InputType = Matrix<28 * 28, 1>;
 	using TargetType = Matrix<10, 1>;
 
-	explicit MNISTDataset(const TrainingDataReader& reader)
-	    : m_reader { reader } { }
+	explicit MNISTDataset(const TrainingDataReader& reader, std::size_t sample_limit = 0)
+	    : m_reader { reader }
+	    , m_sample_limit { sample_limit } { }
 
 	std::size_t size() const {
-		return m_reader.get_train_meta_data().number_of_images;
+		const auto available { static_cast<std::size_t>(m_reader.get_train_meta_data().number_of_images) };
+		return m_sample_limit == 0 ? available : std::min(available, m_sample_limit);
 	}
 
 	InputType get_input(std::size_t index) const {
@@ -45,6 +48,7 @@ public:
 
 private:
 	const TrainingDataReader& m_reader;
+	std::size_t m_sample_limit;
 };
 
 }

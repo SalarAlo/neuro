@@ -170,7 +170,7 @@ public:
 	}
 
 	void clear() {
-		*this = *this - *this;
+		m_array.fill(0);
 	}
 
 	void print() const {

@@ -14,6 +14,7 @@ class Layer {
 public:
 	using InputVector = Matrix<InputNeurons, 1>;
 	using OutputVector = Matrix<OutputNeurons, 1>;
+	using WeightsMatrix = Matrix<OutputNeurons, InputNeurons>;
 
 	constexpr static std::size_t InputNeuronsAmount { InputNeurons };
 	constexpr static std::size_t OutputNeuronsAmount { OutputNeurons };
@@ -66,8 +67,8 @@ public:
 	}
 
 	void zero_grad() {
-		m_weight_gradients = {};
-		m_bias_gradients = {};
+		m_weight_gradients.clear();
+		m_bias_gradients.clear();
 	}
 
 private:
@@ -75,9 +76,9 @@ private:
 	OutputVector m_last_z {};
 
 	OutputVector m_biases {};
-	Matrix<OutputNeurons, InputNeurons> m_weights {};
+	WeightsMatrix m_weights {};
 	OutputVector m_bias_gradients {};
-	Matrix<OutputNeurons, InputNeurons> m_weight_gradients {};
+	WeightsMatrix m_weight_gradients {};
 
 	ActivationFn m_activation_fn {};
 };

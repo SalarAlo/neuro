@@ -5,9 +5,9 @@ project(neuro LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(PROJECT_IS_TOP_LEVEL)
-    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
     # Use Release by default for single-configuration generators.
     if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -50,6 +50,7 @@ if(SOURCE_FILES)
     target_compile_options(neuro_core
         PRIVATE
             ${PROJECT_WARNING_FLAGS}
+            $<$<AND:$<CONFIG:Debug>,$<CXX_COMPILER_ID:GNU,Clang>>:-Og>
     )
 else()
     # Header-only until the project contains non-Main.cpp source files.
@@ -78,6 +79,7 @@ if(PROJECT_IS_TOP_LEVEL)
     target_compile_options(neuro
         PRIVATE
             ${PROJECT_WARNING_FLAGS}
+            $<$<AND:$<CONFIG:Debug>,$<CXX_COMPILER_ID:GNU,Clang>>:-Og>
 
             $<$<CONFIG:Release>:
                 -O3

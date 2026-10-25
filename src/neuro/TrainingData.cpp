@@ -1,6 +1,5 @@
 #include <print>
 
-#include <iterator>
 #include <limits>
 #include <stdexcept>
 #include <string_view>
@@ -25,11 +24,15 @@ namespace {
 		if (!file)
 			throw std::runtime_error("Could not open data file.");
 
-		std::vector<std::uint8_t> result {
-			std::istreambuf_iterator<char> { file },
-			std::istreambuf_iterator<char> {}
-		};
-		if (file.bad())
+		file.seekg(0, std::ios::end);
+		const std::streamoff size { file.tellg() };
+		if (size < 0 || static_cast<std::uintmax_t>(size) > std::numeric_limits<std::size_t>::max())
+			throw std::runtime_error("Could not determine data file size.");
+
+		std::vector<std::uint8_t> result(static_cast<std::size_t>(size));
+		file.seekg(0, std::ios::beg);
+		file.read(reinterpret_cast<char*>(result.data()), size);
+		if (!file)
 			throw std::runtime_error("Could not read data file.");
 		return result;
 	}
